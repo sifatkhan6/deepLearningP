@@ -24,6 +24,7 @@ b1 = np.random.randn(1, hidden_layer)  # Bias for hidden layer
 w2 = np.random.randn(hidden_layer, output_layer)  # Weights for hidden to output layer
 b2 = np.random.randn(1, output_layer)  # Bias for output layer
 
+# Training function using backpropagation
 def train(inputs, target, w1, b1, w2, b2, eta, n_iterations):
     for i in range(n_iterations):
         # Forward Propagation
@@ -50,3 +51,11 @@ def train(inputs, target, w1, b1, w2, b2, eta, n_iterations):
         b1 += np.sum(hidden_gradient, axis=0, keepdims=True) * eta
 
     return w1, b1, w2, b2
+
+# Train the network
+inputs = XOR[['x1','x2']]
+target = XOR['y']
+eta = 0.1  # Learning rate
+n_iterations = 10000  # Number of iterations for training
+w1, b1, w2, b2 = train(inputs, target, w1, b1, w2, b2, eta, n_iterations)
+
