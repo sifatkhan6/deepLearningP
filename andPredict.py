@@ -39,4 +39,4 @@ w = train(inputs, target, w, 0.25, 10)
 # Test the perceptron
 print("\nTesting AND function:")
 result = g(np.c_[inputs, -np.ones((len(inputs), 1))], w)
-print(result)
+print(result) #all done
