@@ -1,8 +1,8 @@
 import numpy as np
-import pandas as pd
 
-# Create truth tables/dataset for logical operations
-XOR = pd.DataFrame({'x1': (0,0,1,1), 'x2': (0,1,0,1), 'y': (0,1,1,0)})
+# XOR dataset
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])  # Input
+y = np.array([[0], [1], [1], [0]])  # XOR output (target)
 
 # Sigmoid activation function
 def sigmoid(x):
@@ -53,9 +53,16 @@ def train(inputs, target, w1, b1, w2, b2, eta, n_iterations):
     return w1, b1, w2, b2
 
 # Train the network
-inputs = XOR[['x1','x2']]
-target = XOR['y']
 eta = 0.1  # Learning rate
 n_iterations = 10000  # Number of iterations for training
-w1, b1, w2, b2 = train(inputs, target, w1, b1, w2, b2, eta, n_iterations)
+w1, b1, w2, b2 = train(X, y, w1, b1, w2, b2, eta, n_iterations)
 
+# Test the network after training
+hidden_input = np.dot(X, w1) + b1
+hidden_output = sigmoid(hidden_input)
+output_input = np.dot(hidden_output, w2) + b2
+output = sigmoid(output_input)
+
+# Print the results
+print("Predicted XOR output:")
+print(np.round(output))
