@@ -30,3 +30,16 @@ def train(inputs, targets, weights, eta, n_iterations):
         weights -= eta * np.dot(np.transpose(inputs), activations - targets)
 
     return weights
+
+# Initialize weights and train for AND function
+w = np.random.randn(3) * 1e-4  # Small random initial weights
+inputs = AND[['x1','x2']]
+target = AND['y']
+
+# Train the perceptron
+w = train(inputs, target, w, 0.25, 10)
+
+# Test the perceptron
+print("\nTesting AND function:")
+result = g(np.c_[inputs, -np.ones((len(inputs), 1))], w)
+print(result)
