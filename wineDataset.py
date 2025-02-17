@@ -170,3 +170,26 @@ for lr in learning_rates:
 
     plt.tight_layout()
     plt.show()
+
+# Create a comparison table
+results = {
+    'Model': ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'],
+    'Hidden Layers': [1, 1, 1, 2, 2, 2, 1, 1, 1],
+    'Neurons': ['[4]', '[4]', '[4]', '[8,4]', '[8,4]', '[8,4]', '[16]', '[16]', '[16]'],
+    'Learning Rate': [0.1, 0.01, 0.001, 0.1, 0.01, 0.001, 0.1, 0.01, 0.001],
+    'Test Accuracy': [
+        results_a[0][3],
+        results_a[1][3],
+        results_a[2][3],
+        results_b[0][3],
+        results_b[1][3],
+        results_b[2][3],
+        results_c[0][3],
+        results_c[1][3],
+        results_c[2][3]
+    ]
+}
+
+import pandas as pd
+results_df = pd.DataFrame(results)
+print(results_df.to_string(index=False))
