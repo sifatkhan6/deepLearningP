@@ -77,3 +77,34 @@ def train_and_evaluate(model, lr, X_train, y_train, X_test, y_test):
 
     test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
     return history, test_loss, test_acc
+
+# train model A
+learning_rates = [0.1, 0.01, 0.001]
+results_a = []
+
+for lr in learning_rates:
+    model_a = create_model_a()
+    history, loss, acc = train_and_evaluate(model_a, lr, X_train_scaled, y_train_cat, X_test_scaled, y_test_cat)
+    results_a.append((lr, history, loss, acc))
+
+    # Plot training history
+    plt.figure(figsize=(12, 4))
+
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['accuracy'], label='Training Accuracy')
+    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+    plt.title(f'Model A - Accuracy (lr={lr})')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.title(f'Model A - Loss (lr={lr})')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
