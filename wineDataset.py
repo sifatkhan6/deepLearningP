@@ -108,3 +108,34 @@ for lr in learning_rates:
 
     plt.tight_layout()
     plt.show()
+
+# train model B
+learning_rates = [0.1, 0.01, 0.001]
+results_b = []
+
+for lr in learning_rates:
+    model_b = create_model_b()
+    history, loss, acc = train_and_evaluate(model_b, lr, X_train_scaled, y_train_cat, X_test_scaled, y_test_cat)
+    results_b.append((lr, history, loss, acc))
+
+    # Plot training history
+    plt.figure(figsize=(12, 4))
+
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['accuracy'], label='Training Accuracy')
+    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+    plt.title(f'Model B - Accuracy (lr={lr})')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.title(f'Model B - Loss (lr={lr})')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
